@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html ng-app="SampleApp">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+</head>
+<body >
+
+    <script>
+        var sampleApp = angular.module('SampleApp', ['ngRoute']);
+
+        sampleApp.config(['$routeProvider',
+            function ($routeProvider) {
+                $routeProvider.
+                when('/Angular', {
+                    templateUrl: 'Angular.html',
+                    controller: 'AngularController'
+                }).when('/Node', {
+                    templateUrl: 'Node.html',
+                    controller: 'NodeController'
+                }).
+                otherwise({
+                    redirectTo: '/Angular'
+                });
+            }
+
+        ]);
+        
+        sampleApp.controller('AngularController', function ($scope) {
+            $scope.tutorial = [
+            { Name: "Controllers", Description: "Controllers in action" },
+            { Name: "Models", Description: "Models and binding data" },
+            {Name:"Directives", Description:"Flexibility of Directives"}]
+        });
+
+        sampleApp.controller('NodeController', function ($scope) {
+            $scope.tutorial = [
+                { Name: "Promises", Description: "Power of Promises" },
+                { Name: "Events", Description: "Events in NodeJs" },
+                {Name:"Modules",Description:"Modules in NodeJs"}
+            ]
+        });
+    </script>
+
+    <h3>Default Route Demo</h3>
+<div>
+    <ul>
+        <li><a href="#Angular">Angular Js Topics</a></li>
+        <li><a href="#Node">Node Js Topics</a></li>
+    </ul>
+    <div ng-view></div>
+</div>
+    </body>
+</html>
